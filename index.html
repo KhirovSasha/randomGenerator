@@ -8,5 +8,25 @@
 </head>
 <body>
     Hello world!
+
+    <form action="display.php" method="post">
+
+        <label>Type of Dice:</label>
+        
+        <select name="dice">
+            <option>d4</option>
+            <option>d6</option>
+            <option>d8</option>
+            <option>d10</option>
+            <option>d12</option>
+            <option>d20</option>
+        <select>
+
+        <label>Number of Dice:</label>
+        <input type="number" name="count">
+        <input type="submit" value="Submit">
+    </form>
+
+    </html>
 </body>
 </html>
