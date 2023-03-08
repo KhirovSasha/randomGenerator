@@ -8,27 +8,35 @@
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
-    <body>
-        Hello world!
 
-        <form id="form" action="display.php" method="post">
+    <body class="container pt-5 bg-secondary">
+        <div class="row pt-5">
+            <div class="col-md-6 mx-auto pt-5 text-light">
+                <h1>Random dice generator 🎲</h1>
 
-            <label>Type of Dice:</label>
-            
-            <select id="dice" name="dice">
-                <option>d4</option>
-                <option>d6</option>
-                <option>d8</option>
-                <option>d10</option>
-                <option>d12</option>
-                <option>d20</option>
-            <select>
-
-            <label>Number of Dice:</label>
-            <input id="count" type="number" name="count">
-            <input id="submit" type="submit" value="Submit">
-        </form>
-        <div id="result"></div>
+                <form id="form" action="display.php" method="post" class="form-inline">
+                    <div class="form-group pt-3">
+                        <label class="mr-3">Type of Dice:</label>
+                    
+                        <select id="dice" name="dice" class="form-control" style="width: 22%;">
+                            <option>d4</option>
+                            <option>d6</option>
+                            <option>d8</option>
+                            <option>d10</option>
+                            <option>d12</option>
+                            <option>d20</option>
+                        <select>
+        
+                        <label class="ml-2 mr-2">Number of Dice:</label>
+                        <input id="count" type="number" name="count" class="form-control ml-auto" style="width: 30%;">    
+                    </div>
+                    <div class="form-group ml-auto pt-2 mr-4">
+                        <input id="submit" type="submit" value="Submit" class="btn btn-light">
+                    </div>
+                </form>
+                <div id="result" class="col-md-6 mx-auto pt-3 ml-auto"></div>
+            </div>
+        </div>  
     </body>
     <script>
         let result = document.getElementById('result');
@@ -38,8 +46,6 @@
             let solicitud = document.getElementById('form')
             makeRequest('display.php', solicitud)
         })
-
-        
 
         function makeRequest(url, solicitud) {
             let json = {
@@ -65,7 +71,7 @@
                     }
                     
                     let div = document.createElement('div');
-                    div.classList.add("dice");
+                    div.classList.add("dice", "border", "text-center" ,"border-dark", "rounded", "px-2", "py-2", "bg-dark");
                     div.textContent = data;
                     result.appendChild(div);
                 })
