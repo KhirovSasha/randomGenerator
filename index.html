@@ -1,32 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Generator</title>
-</head>
-<body>
-    Hello world!
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Random Generator</title>
+    </head>
+    <body>
+        Hello world!
 
-    <form action="display.php" method="post">
+        <form id="form" action="display.php" method="post">
 
-        <label>Type of Dice:</label>
+            <label>Type of Dice:</label>
+            
+            <select id="dice" name="dice">
+                <option>d4</option>
+                <option>d6</option>
+                <option>d8</option>
+                <option>d10</option>
+                <option>d12</option>
+                <option>d20</option>
+            <select>
+
+            <label>Number of Dice:</label>
+            <input id="count" type="number" name="count">
+            <input id="submit" type="submit" value="Submit">
+        </form>
+        <div id="result"></div>
+    </body>
+    <script>
+        let result = document.getElementById('result');
+
+        document.getElementById("submit").addEventListener('click', e => {
+            e.preventDefault();
+            let solicitud = document.getElementById('form')
+            makeRequest('display.php', solicitud)
+        })
+
         
-        <select name="dice">
-            <option>d4</option>
-            <option>d6</option>
-            <option>d8</option>
-            <option>d10</option>
-            <option>d12</option>
-            <option>d20</option>
-        <select>
 
-        <label>Number of Dice:</label>
-        <input type="number" name="count">
-        <input type="submit" value="Submit">
-    </form>
+        function makeRequest(url, solicitud) {
+            let json = {
+                count: document.getElementById('count').value,
+                dice: document.getElementById('dice').value,
+            };
 
-    </html>
-</body>
+            let data = new FormData(solicitud)
+
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(json),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+                }).then(response => {
+                    return response.json();
+                }).then(data => {
+                    if (result.childElementCount > 0) {
+                        while (result.firstChild) {
+                            result.removeChild(result.firstChild);
+                        }
+                    }
+                    for (tiro in data) {
+                        let div = document.createElement('div');
+
+                        div.classList.add("dice");
+                        div.textContent = data[tiro];
+
+                        result.appendChild(div);
+                    }
+                })
+        }
+    </script>
 </html>
