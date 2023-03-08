@@ -61,14 +61,11 @@
                             result.removeChild(result.firstChild);
                         }
                     }
-                    for (tiro in data) {
-                        let div = document.createElement('div');
-
-                        div.classList.add("dice");
-                        div.textContent = data[tiro];
-
-                        result.appendChild(div);
-                    }
+                    
+                    let div = document.createElement('div');
+                    div.classList.add("dice");
+                    div.textContent = data;
+                    result.appendChild(div);
                 })
         }
     </script>
